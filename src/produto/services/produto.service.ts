@@ -47,6 +47,21 @@ export class ProdutoService {
         });
     }
 
+    async findByPrecoMaior(preco: number): Promise<Produto[]> {
+        return await this.produtoRepository.find({
+            where: { preco: MoreThan(preco) },
+            relations: { categoria: true },
+            order: { preco: 'ASC' } // Ordenação crescente
+        });
+    }
+    
+    async findByPrecoMenor(preco: number): Promise<Produto[]> {
+        return await this.produtoRepository.find({
+            where: { preco: LessThan(preco) },
+            relations: { categoria: true },
+            order: { preco: 'DESC' } // Ordenação decrescente
+        });
+    }
 
     async create(produto: Produto): Promise<Produto> {
         const categoria = await this.categoriaService.findById(produto.categoria.id);
