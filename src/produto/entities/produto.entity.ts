@@ -1,8 +1,9 @@
 import { Transform, TransformFnParams } from "class-transformer";
 import { IsNotEmpty, IsNumber, IsPositive, MaxLength } from "class-validator";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { NumericTransformer } from "../../util/numerictransformer";
 import { Categoria } from "../../categoria/entities/categoria.entity";
+import { Estoque } from "../../estoque/entities/estoque.entity";
 
 @Entity({ name: "tb_produtos" })
 export class Produto {
@@ -34,5 +35,8 @@ export class Produto {
   @ManyToOne(() => Categoria, (categoria) => categoria.produto, {
       onDelete: "CASCADE"})
       categoria: Categoria;
+
+  @OneToMany(() => Estoque, (estoque) => estoque.produto)
+      estoque: Estoque[];
     
 }
