@@ -16,6 +16,7 @@ export class ProdutoService {
         return await this.produtoRepository.find({
             relations: {
                 categoria: true,
+                estoque: true,
             }
         });
     }
@@ -27,6 +28,7 @@ export class ProdutoService {
             },
             relations: { 
                 categoria: true,
+                estoque: true,
             }
         });
 
@@ -43,6 +45,7 @@ export class ProdutoService {
             },
             relations: { 
             categoria: true,
+            estoque: true,
             }
         });
     }
